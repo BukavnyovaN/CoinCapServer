@@ -5,8 +5,12 @@ import { z } from 'zod';
 export const t = initTRPC.create();
 
 export const appRouter = t.router({
-  assets: t.procedure.query(() => {
-    return axios.get('http://api.coincap.io/v2/assets')
+  assets: t.procedure
+  .input(z.object({ limit: z.number(), ids: z.string() }))
+  .query(async (opts) => {
+    const ids = opts.input.ids;
+    const limit = opts.input.limit;
+    return axios.get(`http://api.coincap.io/v2/assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`) // `assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`
         .then(function (response) {
             return response.data.data;
         })
