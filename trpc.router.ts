@@ -6,11 +6,12 @@ export const t = initTRPC.create();
 
 export const appRouter = t.router({
   assets: t.procedure
-  .input(z.object({ limit: z.number(), ids: z.string() }))
+  .input(z.object({ limit: z.number().optional(), ids: z.string().optional() }))
   .query(async (opts) => {
-    const ids = opts.input.ids;
-    const limit = opts.input.limit;
-    return axios.get(`http://api.coincap.io/v2/assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`) // `assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`
+    const ids = opts.input.ids || '';
+    const limit = opts.input.limit || '';
+    const url = `http://api.coincap.io/v2/assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`;
+    return axios.get(url) // `assets?${limit && `limit=${limit}`}${ids && `&ids=${ids}`}`
         .then(function (response) {
             return response.data.data;
         })
