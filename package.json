@@ -2,6 +2,7 @@
   "name": "coincapserver",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://BukavnyovaN.github.io/CoinCapServer",
   "main": "test.js",
   "dependencies": {
     "@trpc/server": "^10.37.1",
@@ -9,13 +10,15 @@
     "@types/node": "^20.5.3",
     "axios": "^1.4.0",
     "express": "^4.18.2",
+    "gh-pages": "^6.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
     "zod": "^3.22.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node test.ts"
+    "dev": "ts-node test.ts",
+    "build": "echo 'hello world'"
   },
   "author": "",
   "license": "ISC"
